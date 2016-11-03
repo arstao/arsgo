@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+android {
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  buildToolsVersion rootProject.ext.buildToolsVersion
+
+  defaultConfig {
+    minSdkVersion rootProject.ext.minSdk
+    targetSdkVersion rootProject.ext.targetSdk
+    versionName "1.0"
+    versionCode 1
+
+    packagingOptions {
+      exclude 'LICENSE.txt'
+    }
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility rootProject.ext.javaSourceCompatibility
+    targetCompatibility rootProject.ext.javaTargetCompatibility
+  }
+
+  /*
+  testOptions {
+    unitTests.returnDefaultValues = true
+  }
+  */
+}
+
+dependencies {
+  compile 'com.android.support:support-v4:23.1.1'
+  compile 'com.android.support:appcompat-v7:' + rootProject.ext.appcompat7Version
+  compile 'com.android.support:recyclerview-v7:' + rootProject.ext.recyclerviewVersion
+
+  compile 'com.jakewharton:butterknife:' + rootProject.ext.butterknifeVersion
+
+  compile 'io.reactivex:rxjava:'+rootProject.ext.rxjavaVersion
+  compile 'io.reactivex:rxandroid:'+rootProject.ext.rxandroidVersion
+
+  compile 'com.squareup.retrofit:retrofit:'+ rootProject.ext.retrofitVersion
+
+  compile 'com.google.dagger:dagger:'+rootProject.ext.dagger2Version
+  apt 'com.google.dagger:dagger-compiler:'+rootProject.ext.dagger2Version
+  compile 'javax.annotation:javax.annotation-api:1.2'
+
+  compile 'com.squareup.okhttp:okhttp:'+ rootProject.ext.okhttpVersion
+
+  compile 'com.squareup.picasso:picasso:'+ rootProject.ext.picassoVersion
+  compile 'com.android.support:support-annotations:' + rootProject.ext.supportAnnotations
+
+
+  testCompile 'junit:junit:' + rootProject.ext.junitVersion
+  testCompile 'org.mockito:mockito-core:' + rootProject.ext.mockitoVersion
+
+  testCompile "org.robolectric:robolectric:"+rootProject.ext.robolectricVersion
+  testCompile "org.robolectric:shadows-support-v4:"+rootProject.ext.robolectricVersion
+
+
+
+  testCompile('org.powermock:powermock-api-mockito:' + rootProject.ext.powermockVersion) {
+    exclude module: 'hamcrest-core'
+    exclude module: 'objenesis'
+  }
+  testCompile('org.powermock:powermock-module-junit4:' + rootProject.ext.powermockVersion) {
+    exclude module: 'hamcrest-core'
+    exclude module: 'objenesis'
+  }
+
+}
